@@ -27,6 +27,11 @@
 
     <p id="message" class="message">スタートを押してね</p>
 
+    <div class="actions">
+      <button id="startButton" class="control-button" type="button">スタート</button>
+      <button id="restartButton" class="control-button secondary" type="button" disabled>リスタート</button>
+    </div>
+
     <section id="board" class="board" aria-label="モグラを叩くマス">
       <button class="hole" type="button" aria-label="マス1"></button>
       <button class="hole" type="button" aria-label="マス2"></button>
@@ -39,10 +44,31 @@
       <button class="hole" type="button" aria-label="マス9"></button>
     </section>
 
-    <div class="actions">
-      <button id="startButton" class="control-button" type="button">スタート</button>
-      <button id="restartButton" class="control-button secondary" type="button" disabled>リスタート</button>
-    </div>
+    <section class="character-guide" aria-label="キャラクター説明">
+      <h2>キャラクター</h2>
+      <div class="character-list">
+        <div class="character-card">
+          <img src="king.png" alt="キングモグラ">
+          <span>キングモグラ</span>
+          <strong>+10</strong>
+        </div>
+        <div class="character-card">
+          <img src="ikemen.png" alt="イケメンモグラ">
+          <span>イケメンモグラ</span>
+          <strong>+5</strong>
+        </div>
+        <div class="character-card">
+          <img src="kyapi.png" alt="きゃぴモグラ">
+          <span>きゃぴモグラ</span>
+          <strong>+3</strong>
+        </div>
+        <div class="character-card">
+          <img src="oji.png" alt="おじモグラ">
+          <span>おじモグラ</span>
+          <strong>+1</strong>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="script.js"></script>

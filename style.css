@@ -6,23 +6,25 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #263238;
-  background: #f6f3ea;
+  color: #30333a;
+  background: linear-gradient(180deg, #fff2a8 0%, #ffd1e1 52%, #c7f3ff 100%);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 18px;
 }
 
 .game {
-  width: min(100%, 440px);
+  width: min(100%, 460px);
   text-align: center;
 }
 
 h1 {
   margin: 0 0 14px;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   letter-spacing: 0;
+  color: #ef476f;
+  text-shadow: 2px 2px 0 #ffffff;
 }
 
 .status {
@@ -34,9 +36,10 @@ h1 {
 
 .status-box {
   background: #ffffff;
-  border: 2px solid #d8cfb5;
+  border: 3px solid #ffbf69;
   border-radius: 8px;
   padding: 10px 6px;
+  box-shadow: 0 5px 0 rgba(255, 143, 92, 0.22);
 }
 
 .status-box span {
@@ -55,24 +58,79 @@ h1 {
   min-height: 28px;
   margin: 0 0 12px;
   font-weight: 700;
-  color: #2f6f5e;
+  color: #118ab2;
+}
+
+.character-guide {
+  margin-top: 14px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 3px solid #ffffff;
+  border-radius: 8px;
+}
+
+.character-guide h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #6a4c93;
+}
+
+.character-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.character-card {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 74px;
+  padding: 8px;
+  background: #fff9f0;
+  border: 2px solid #ffd166;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.character-card img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+}
+
+.character-card span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.character-card strong {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: #06d6a0;
+  color: #ffffff;
+  font-size: 0.86rem;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  width: 100%;
+  width: min(100%, 390px);
   aspect-ratio: 1 / 1;
-  margin: 0 auto 18px;
+  margin: 0 auto;
 }
 
 .hole {
   position: relative;
-  border: 0;
+  border: 3px solid #5c4033;
   border-radius: 8px;
-  background: #7d5a3b;
-  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.14), inset 0 -10px 0 rgba(0, 0, 0, 0.18);
+  background: radial-gradient(circle at 50% 65%, #4d3428 0 36%, #7d5a3b 37% 100%);
+  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.16), inset 0 -10px 0 rgba(0, 0, 0, 0.18), 0 5px 0 rgba(92, 64, 51, 0.24);
   cursor: pointer;
   touch-action: manipulation;
   overflow: hidden;
@@ -90,54 +148,53 @@ h1 {
   background: rgba(0, 0, 0, 0.2);
 }
 
-/* モグラがいるマスだけ、丸い顔を表示します */
-.hole.mole::after {
-  content: "モグ";
+.mole-image {
   position: absolute;
   left: 50%;
-  bottom: 15%;
-  width: 66%;
-  height: 66%;
-  border-radius: 50% 50% 42% 42%;
-  background: #c18a55;
-  color: #2d2118;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 800;
-  font-size: clamp(1rem, 5vw, 1.45rem);
+  bottom: 4%;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+  user-select: none;
   transform: translateX(-50%);
-  animation: popUp 0.18s ease-out;
+  animation: popUp 0.2s ease-out;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.18));
 }
 
 .hole.hit {
-  animation: hitFlash 0.16s ease-out;
+  animation: hitFlash 0.18s ease-out;
 }
 
 .actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-bottom: 14px;
 }
 
 .control-button {
   min-height: 54px;
   border: 0;
   border-radius: 8px;
-  background: #2f6f5e;
+  background: #ef476f;
   color: #ffffff;
   font-size: 1.05rem;
   font-weight: 800;
   cursor: pointer;
   touch-action: manipulation;
+  box-shadow: 0 5px 0 #b82f52;
 }
 
 .control-button.secondary {
-  background: #455a64;
+  background: #118ab2;
+  box-shadow: 0 5px 0 #0b6685;
 }
 
 .control-button:disabled {
   background: #b4b8b6;
+  box-shadow: 0 5px 0 #8b8f8d;
   cursor: not-allowed;
 }
 
@@ -148,10 +205,12 @@ h1 {
 
 @keyframes popUp {
   from {
-    transform: translateX(-50%) translateY(45%);
+    transform: translateX(-50%) translateY(50%) scale(0.8);
+    opacity: 0;
   }
   to {
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
   }
 }
 
@@ -178,6 +237,10 @@ h1 {
   }
 
   .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .character-list {
     grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #263238;
+  background: #f6f3ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+}
+
+.game {
+  width: min(100%, 440px);
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-size: 2.1rem;
+  letter-spacing: 0;
+}
+
+.status {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.status-box {
+  background: #ffffff;
+  border: 2px solid #d8cfb5;
+  border-radius: 8px;
+  padding: 10px 6px;
+}
+
+.status-box span {
+  display: block;
+  font-size: 0.82rem;
+  color: #5f6f65;
+}
+
+.status-box strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.35rem;
+}
+
+.message {
+  min-height: 28px;
+  margin: 0 0 12px;
+  font-weight: 700;
+  color: #2f6f5e;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 18px;
+}
+
+.hole {
+  position: relative;
+  border: 0;
+  border-radius: 8px;
+  background: #7d5a3b;
+  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.14), inset 0 -10px 0 rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  touch-action: manipulation;
+  overflow: hidden;
+}
+
+/* 穴の下側に影を作って、少し立体的に見せます */
+.hole::before {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 12%;
+  height: 18%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* モグラがいるマスだけ、丸い顔を表示します */
+.hole.mole::after {
+  content: "モグ";
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  width: 66%;
+  height: 66%;
+  border-radius: 50% 50% 42% 42%;
+  background: #c18a55;
+  color: #2d2118;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: clamp(1rem, 5vw, 1.45rem);
+  transform: translateX(-50%);
+  animation: popUp 0.18s ease-out;
+}
+
+.hole.hit {
+  animation: hitFlash 0.16s ease-out;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.control-button {
+  min-height: 54px;
+  border: 0;
+  border-radius: 8px;
+  background: #2f6f5e;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.control-button.secondary {
+  background: #455a64;
+}
+
+.control-button:disabled {
+  background: #b4b8b6;
+  cursor: not-allowed;
+}
+
+.control-button:active:not(:disabled),
+.hole:active {
+  transform: scale(0.97);
+}
+
+@keyframes popUp {
+  from {
+    transform: translateX(-50%) translateY(45%);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes hitFlash {
+  from {
+    filter: brightness(1.25);
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .status-box strong {
+    font-size: 1.15rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
